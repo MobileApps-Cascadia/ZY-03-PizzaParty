@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- TODO: Change layout from LinearLayout to androidx ConstraintLayout
+<!-- : Change layout from LinearLayout to androidx ConstraintLayout
      (be sure to add the dependency to the app modules build.gradle file -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
+
+
     tools:context="com.zybooks.pizzaparty.MainActivity">
 
-    <!-- TODO: Set the following Horizontal (H) and Vertical (V) constraints
+    <!--  Set the following Horizontal (H) and Vertical (V) constraints
                H: constraintStart to start of parent,
                V: constrainTop to bottom of calc_button -->
         <ImageView
@@ -23,9 +21,12 @@
             android:contentDescription="@string/pizza_background"
             android:scaleType="fitEnd"
             android:src="@drawable/pizza"
-            tools:ignore="ImageContrastCheck" />
+            tools:ignore="ImageContrastCheck"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calc_button"
+            />
 
-    <!-- TODO: Constrain num_attend_text to "parent"
+    <!--  Constrain num_attend_text to "parent"
                H: constrainStart to start
                V: constrainTop to top
                 use margins of 16dp for both"-->
@@ -34,45 +35,59 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/number_of_people"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            />
 
-    <!-- TODO: Constrain edit_text to num_attend_text;
+    <!-- : Constrain edit_text to num_attend_text;
                H:constraintStart to end,
                V:constraintBaseline to baseline  -->
-        <EditText
-            android:id="@+id/num_attend_edit_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="5"
-            android:hint="@string/_10"
-            android:importantForAutofill="no"
-            android:inputType="number" />
+    <EditText
+        android:id="@+id/num_attend_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:hint="@string/_10"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@id/num_attend_text"
+        app:layout_constraintBaseline_toBaselineOf="@id/num_attend_text"
+        />
 
-    <!-- TODO: Constrain hungry_text to number_attend_text
+    <!--  Constrain hungry_text to number_attend_text
                 H: constraintStart to start,
                 V: constraintTop to bottom (with 16dp top margin) -->
-        <TextView
-            android:id="@+id/hungry_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/how_hungry"
-            android:textSize="24sp"
-            android:labelFor="@id/hungry_radio_group" />
+    <TextView
+        android:id="@+id/hungry_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:labelFor="@id/hungry_radio_group"
+        android:text="@string/how_hungry"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@id/num_attend_text"
+        app:layout_constraintTop_toBottomOf="@id/num_attend_text" />
 
-    <!-- TODO: Constrain hungry_radio_group to hungry_text
+    <!-- : Constrain hungry_radio_group to hungry_text
                H: constrainStart to start
                V: constrainTop to bottom -->
         <RadioGroup
             android:id="@+id/hungry_radio_group"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/hungry_text"
+            app:layout_constraintTop_toBottomOf="@id/hungry_text"
+            >
             <RadioButton
                 android:id="@+id/light_radio_button"
                 android:text="@string/light"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
             <RadioButton
                 android:id="@+id/medium_radio_button"
                 android:text="@string/medium"
@@ -86,23 +101,33 @@
                 android:layout_height="wrap_content" />
         </RadioGroup>
 
-    <!-- TODO: H: constraintEnd to end of parent, with a 16dp marginEnd
+    <!--  : constraintEnd to end of parent, with a 16dp marginEnd
                V: constrainTop to bottom of calc_button -->
-        <TextView
-            android:id="@+id/num_pizzas_text_view"
-            android:text="@string/total_pizzas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"/>
+    <TextView
+        android:id="@+id/num_pizzas_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/total_pizzas"
+
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calc_button" />
 
     <!-- TODO: H: constraintEnd to end of num_pizzas_text_view, constrainStart to start of num_pizzas_text_view
                V: constraintTop to bottom of hungry_radio_group, with a 16dp marginTop
                set layout_width to "0dp" so the constraints can set its width -->
-        <Button
-            android:id="@+id/calc_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="calculateClick"
-            android:text="@string/calculate" />
+    <Button
+        android:id="@+id/calc_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="calculateClick"
+        android:text="@string/calculate"
+        app:layout_constraintEnd_toEndOf="@id/num_pizzas_text_view"
+        app:layout_constraintStart_toStartOf="@id/num_pizzas_text_view"
+        app:layout_constraintTop_toBottomOf="@id/hungry_radio_group"
+        />
     <!-- TODO: Remove the android:onClick attribute from the calc_button -->
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
