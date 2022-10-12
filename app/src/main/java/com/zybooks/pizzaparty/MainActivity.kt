@@ -1,5 +1,6 @@
 package com.zybooks.pizzaparty
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -27,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         numPizzasTextView.setText("Total pizzas: ")
 
         //TODO: Set the OnButtonClick event handler for the calculateButton to the calculateClick function
+        calculateTotal.setOnClickListener { view: View ->
+            calculateClick(view)
+        }
     }
 
     fun calculateClick(view: View) {
